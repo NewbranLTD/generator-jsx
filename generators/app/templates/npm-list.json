@@ -1,0 +1,116 @@
+{
+    "git": [
+        "gulp-bump",
+        "gulp-git",
+        "gulp-git-push",
+        "gulp-tag-version",
+        "semver"
+    ],
+    "dev": [
+        "riot",
+
+        "lodash",
+
+        "eslint",
+        "eslint-plugin-riot",
+
+        "babel-cli",
+        "babel-plugin-external-helpers",
+        "babel-preset-es2015",
+        "babel-preset-es2015-rollup",
+        "babel-preset-stage-0",
+
+        "rollup",
+        "rollup-plugin-babel",
+        "rollup-plugin-cleanup",
+        "rollup-plugin-commonjs",
+        "rollup-plugin-eslint",
+        "rollup-plugin-includepaths",
+        "rollup-plugin-inject",
+        "rollup-plugin-json",
+        "rollup-plugin-node-resolve",
+        "rollup-plugin-replace",
+        "rollup-plugin-riot",
+        "rollup-plugin-string",
+        "rollup-plugin-uglify",
+        "rollup-stream",
+
+        "wiredep",
+
+        "vinyl-buffer",
+        "vinyl-source-stream",
+        "yargs",
+        "uglify-js",
+        "stream-series",
+
+        "del",
+        "glob",
+
+        "gulpjs/gulp.git#4.0",
+
+        "gulp-concat",
+        "gulp-eslint",
+        "gulp-filter",
+        "gulp-inject",
+        "gulp-rename",
+        "gulp-replace-task",
+        "gulp-shell",
+        "gulp-sourcemaps",
+        "gulp-uglify",
+        "gulp-util",
+        "gulp-webserver-io",
+        "gulp-main-bower-files",
+        "gulp-htmlmin",
+        "gulp-clean-css"
+    ],
+    "based": [
+        "riot",
+        "riot-route"
+    ],
+    "bower": [
+        {"value": "jquery", "name": "$"},
+        {"value": "bacon" , "name": "Bacon"},
+        {"value": "immutable" , "name": "immutable"},
+        {"value": "lodash" , "name": "_"},
+        {"value": "moment" , "name": "moment"},
+        {"value": "promise-polyfill" , "name": "promise"},
+        {"value": "fetch" , "name": "promise"}
+    ],
+    "npm": [
+        {"value": "riot" , "name": "riot"},
+        {"value": "riot-route" , "name": "route"}
+    ],
+    "optional": [
+        {"value": "jquery", "name": "$"},
+        {"value": "baconjs" , "name": "Bacon"},
+        {"value": "immutable" , "name": "immutable"},
+        {"value": "lodash" , "name": "_"},
+        {"value": "moment" , "name": "moment"},
+        {"value": "promise-polyfill" , "name": "promise"},
+        {"value": "fetch" , "name": "promise"}
+    ],
+    "karma": [
+        "karma",
+        "karma-mocha",
+        "karma-mocha-reporter",
+        "karma-phantomjs-launcher",
+        "karma-riot"
+    ],
+    "jest": [
+        "jest",
+        "jest-cli",
+        "babel-jest",
+        "riot-jest-transformer"
+    ],
+    "scss": [
+        "gulp-sass",
+        "gulp-autoprefixer"
+    ],
+    "postcss": [
+        "postcss",
+        "postcss-cssnext",
+        "gulp-postcss",
+        "cssnano",
+        "autoprefixer"
+    ]
+}

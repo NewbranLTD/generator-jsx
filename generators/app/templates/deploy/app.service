@@ -1,0 +1,16 @@
+# systemd file for the auto-start script to start up the node server at run time
+# this need to copy to /etc/systemd/system
+# then $ sudo systemctl enable <%= app_name %>
+
+[Service]
+ExecStart=/usr/bin/node <%= path_to_server_js %>
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=<%= app_name %>
+User=<%= exec_user %>
+Group=<%= exec_group %>
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

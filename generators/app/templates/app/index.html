@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="<%= lang %>">
+    <head>
+        <meta charset="utf-8" />
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name="generator" content="https://to1source.com/generators/" />
+        <% if (cssFilePath) { %>
+            <% if (cssFramework === 'materialui') { %>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <% } %>
+        <% } %>
+
+        <!-- bower:css -->
+        <!-- endbower -->
+
+        <!-- inject:css -->
+        <!-- endinject -->
+
+    </head>
+    <body>
+        <app></app>
+
+        <!-- bower:js -->
+        <!-- endbower -->
+
+        <!-- inject:js -->
+        <!-- endinject -->
+
+    </body>
+</html>
