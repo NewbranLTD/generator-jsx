@@ -1,0 +1,56 @@
+{
+  "name": "generator-preact",
+  "version": "0.0.0",
+  "description": "Yeoman generator for preact.js (not react!!!) with gulp , rollup and other goodies",
+  "homepage": "https://github.com/joelchu/generator-preact",
+  "author": {
+    "name": "Joel Chu",
+    "email": "joelckchu@gmail.com",
+    "url": "joelchu.com"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "yeoman",
+    "generator",
+    "generators",
+    "yeoman-generator",
+    "node",
+    "preact",
+    "redux"
+  ],
+  "devDependencies": {
+    "yeoman-test": "^1.6.0",
+    "yeoman-assert": "^3.0.0",
+    "coveralls": "^2.13.1",
+    "nsp": "^2.6.3",
+    "eslint": "^4.1.0",
+    "eslint-config-xo-space": "^0.16.0",
+    "jest": "^21.0.0",
+    "jest-cli": "^21.0.0"
+  },
+  "dependencies": {
+    "yeoman-generator": "^1.0.0",
+    "chalk": "^1.1.3",
+    "yosay": "^2.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "prepublish": "nsp check",
+    "pretest": "eslint . --fix",
+    "test": "jest"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "env": {
+      "jest": true,
+      "node": true
+    }
+  },
+  "repository": "git@github.com:joelchu/generator-preact.git",
+  "license": "MIT"
+}

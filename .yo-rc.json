@@ -1,0 +1,12 @@
+{
+  "generator-preyo": {
+    "lang": "en"
+  },
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Joel Chu",
+      "authorEmail": "joelckchu@gmail.com",
+      "authorUrl": "joelchu.com"
+    }
+  }
+}
