@@ -1,18 +1,18 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
-/**
- * this is the top level app/index.js 
- */
 
+const chalk = require('chalk'),
+    yosay = require('yosay'),
+/**
+ * this is the top level app/index.js
+ */
 // include our BaseClass extends from Generator
-const BaseClass = require('../../lib/base-class.js');
+BaseClass = require('../../lib/base-class.js');
 
 module.exports = class extends BaseClass {
 
     /**
      * class constructor
+     * @param {object} args arguments
+     * @param {array} opts options
      */
     constructor(args , opts) {
         // init parent
@@ -27,6 +27,7 @@ module.exports = class extends BaseClass {
 
     /**
      * where you put your init methods
+     * @returns {null} nothing
      */
     initializing() {
         this.argument('name', {
@@ -38,6 +39,7 @@ module.exports = class extends BaseClass {
 
     /**
      * configuration task if any
+     * @return {null} nothing
      */
     configuring() {
 
@@ -45,6 +47,7 @@ module.exports = class extends BaseClass {
 
     /**
      * the default task - but not recommend to use this see next
+     * @return {null} nothing
      */
     default() {
 
@@ -52,6 +55,7 @@ module.exports = class extends BaseClass {
 
     /**
      * where you ask questions and collect answers in the this.props
+     * @return {null} nothing
      */
     prompting() {
         // Have Yeoman greet the user.
@@ -70,7 +74,10 @@ module.exports = class extends BaseClass {
             this.props = props;
         });
     }
-
+    /**
+     *
+     * @return {null} nothing
+     */
     writing() {
         this.fs.copy(
             this.templatePath('dummyfile.txt'),
@@ -79,18 +86,21 @@ module.exports = class extends BaseClass {
     }
     /**
      * conflicts handler during the write
+     * @return {null} nothing
      */
     conflicts() {
 
     }
     /**
      * run the installer
+     * @return {null} nothing
      */
     install() {
         this.installDependencies();
     }
     /**
      * end and run the clean up etc
+     * @return {null} nothing
      */
     end() {
 
