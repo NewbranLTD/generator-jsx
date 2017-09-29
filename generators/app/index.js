@@ -24,6 +24,15 @@ module.exports = class extends Installer {
         this.suggestAppName = args.length ? args[baseIndex] : path.basename(this.contextRoot);
          // Skip installation
         this.skipInstallation = opts['skip-installation-for-test-purpose-only'];
+        this.config.set({
+            appName: this.appName,
+            lang: this.lang
+        });
+        // @TODO this will change to npm instead
+        this.optionals = this.npmList.bower.map(optional => {
+            optional.checked = true;
+            return optional;
+        });
 
     }
 
