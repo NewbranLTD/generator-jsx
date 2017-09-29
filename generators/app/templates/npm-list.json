@@ -50,6 +50,10 @@
             "bower": "tachyons"
         }
     ],
+    "cssDevStyles": [
+        {"name": "Plain CSS (with postcss cssnext plugin)", "value": "css"},
+        {"name": "SASS preprocessor", "value": "scss"}
+    ],
     "dev": [
         "riot",
 
@@ -74,7 +78,7 @@
         "rollup-plugin-json",
         "rollup-plugin-node-resolve",
         "rollup-plugin-replace",
-        "rollup-plugin-riot",
+        
         "rollup-plugin-string",
         "rollup-plugin-uglify",
         "rollup-stream",
