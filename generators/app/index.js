@@ -5,9 +5,9 @@ const chalk = require('chalk'),
  * this is the top level app/index.js
  */
 // include our BaseClass extends from Generator
-BaseClass = require('../../lib/base-class.js');
+Installer = require('../../lib/installer.js');
 
-module.exports = class extends BaseClass {
+module.exports = class extends Installer {
 
     /**
      * class constructor
