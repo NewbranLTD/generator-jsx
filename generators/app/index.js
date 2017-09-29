@@ -1,6 +1,8 @@
 
 const chalk = require('chalk'),
     yosay = require('yosay'),
+    path = require('path'),
+
 /**
  * this is the top level app/index.js
  */
@@ -16,8 +18,13 @@ module.exports = class extends Installer {
      */
     constructor(args , opts)
     {
+        const baseIndex = 0;
         // init parent
         super(args , opts);
+        this.suggestAppName = args.length ? args[baseIndex] : path.basename(this.contextRoot);
+         // Skip installation
+        this.skipInstallation = opts['skip-installation-for-test-purpose-only'];
+
     }
 
     ///////////////////////////////////////

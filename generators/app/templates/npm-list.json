@@ -14,15 +14,15 @@
             "bower": null
         },
         {
-            "name": "Bootstrap V.4 (alpha.${version})",
+            "name": "Bootstrap V.4 (alpha.$version)",
             "value": "bootstrap4",
-            "bower": "bootstrap@4.0.0-alpha.${version}",
+            "bower": "bootstrap@4.0.0-alpha.$version",
             "npm": ""
         },
         {
-            "name": "Daemonite's Material UI (alpha.${version})",
+            "name": "Daemonite's Material UI (alpha.$version)",
             "value": "materialui",
-            "bower": "daemonite-material@4.0.0-alpha.${version}",
+            "bower": "daemonite-material@4.0.0-alpha.$version",
             "npm": ""
         },
         {
@@ -78,7 +78,7 @@
         "rollup-plugin-json",
         "rollup-plugin-node-resolve",
         "rollup-plugin-replace",
-        
+
         "rollup-plugin-string",
         "rollup-plugin-uglify",
         "rollup-stream",
