@@ -6,6 +6,50 @@
         "gulp-tag-version",
         "semver"
     ],
+    "css": [
+        {
+            "name": "Not using any css framework",
+            "value": "none",
+            "npm": null,
+            "bower": null
+        },
+        {
+            "name": "Bootstrap V.4 (alpha.${version})",
+            "value": "bootstrap4",
+            "bower": "bootstrap@4.0.0-alpha.${version}",
+            "npm": ""
+        },
+        {
+            "name": "Daemonite's Material UI (alpha.${version})",
+            "value": "materialui",
+            "bower": "daemonite-material@4.0.0-alpha.${version}",
+            "npm": ""
+        },
+        {
+            "name": "Fezvrasta Bootstrap Material Design 4",
+            "value": "bmd4",
+            "bower": "bootstrap-material-design#v4.0.0-beta.3",
+            "npm": ""
+        },
+        {
+            "name": "Foundation 6",
+            "value": "foundation6",
+            "bower": "foundation-sites",
+            "npm": ""
+        },
+        {
+            "name": "Semantic UI" ,
+            "value": "SemanticUI" ,
+            "npm": "",
+            "bower": ""
+        },
+        {
+            "name": "Tachyons",
+            "value": "tachyons",
+            "npm": "tachyons",
+            "bower": "tachyons"
+        }
+    ],
     "dev": [
         "riot",
 
