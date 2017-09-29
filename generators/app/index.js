@@ -14,7 +14,8 @@ module.exports = class extends BaseClass {
      * @param {object} args arguments
      * @param {array} opts options
      */
-    constructor(args , opts) {
+    constructor(args , opts)
+    {
         // init parent
         super(args , opts);
     }
@@ -41,23 +42,26 @@ module.exports = class extends BaseClass {
      * configuration task if any
      * @return {null} nothing
      */
-    configuring() {
-
+    configuring()
+    {
+        // configuration option goes here
     }
 
     /**
      * the default task - but not recommend to use this see next
      * @return {null} nothing
      */
-    default() {
-
+    default()
+    {
+        // I don't find this default any useful and rather confusing
     }
 
     /**
      * where you ask questions and collect answers in the this.props
      * @return {null} nothing
      */
-    prompting() {
+    prompting()
+    {
         // Have Yeoman greet the user.
         this.log(yosay(
             'Welcome to the luminous ' + chalk.red('generator-preact') + ' generator!'
@@ -78,7 +82,8 @@ module.exports = class extends BaseClass {
      *
      * @return {null} nothing
      */
-    writing() {
+    writing()
+    {
         this.fs.copy(
             this.templatePath('dummyfile.txt'),
             this.destinationPath('dummyfile.txt')
@@ -88,22 +93,25 @@ module.exports = class extends BaseClass {
      * conflicts handler during the write
      * @return {null} nothing
      */
-    conflicts() {
-
+    conflicts()
+    {
+        // resolve any conflicts you may have during installation
     }
     /**
      * run the installer
      * @return {null} nothing
      */
-    install() {
+    install()
+    {
         this.installDependencies();
     }
     /**
      * end and run the clean up etc
      * @return {null} nothing
      */
-    end() {
-
+    end()
+    {
+        // any clean up or say goodbye etc here
     }
 
 };
