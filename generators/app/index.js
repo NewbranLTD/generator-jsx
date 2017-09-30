@@ -7,6 +7,7 @@ const chalk = require('chalk'),
  * this is the top level app/index.js
  */
 // include our BaseClass extends from Generator
+version = require('../../package.json').version,
 Installer = require('../../lib/installer.js');
 
 module.exports = class extends Installer {
@@ -33,7 +34,6 @@ module.exports = class extends Installer {
             optional.checked = true;
             return optional;
         });
-
     }
 
     ///////////////////////////////////////
@@ -50,9 +50,17 @@ module.exports = class extends Installer {
      */
     initializing()
     {
-        
-
-
+        this.log(
+            yosay(
+                this.langObj.greeting.replace(
+                    '{{generatorName}}',
+                    chalk.red('generator-rtjs')
+                ).replace(
+                    '{{version}}',
+                    version
+                )
+            )
+        );
     }
 
     /**
@@ -61,7 +69,24 @@ module.exports = class extends Installer {
      */
     configuring()
     {
-        // configuration option goes here
+        const cn = this.lang === 'cn',
+        installChoices = [
+            {
+                name: 'npm',
+                value: 'npmInstall'
+            },
+            {
+                name: 'yarn',
+                value: 'yarnInstall'
+            }
+        ];
+        if (cn) {
+            installChoices.push({
+                name: 'cnpm',
+                value: 'cnpm'
+            });
+        }
+        // need to figure out the app name here
     }
 
     /**
