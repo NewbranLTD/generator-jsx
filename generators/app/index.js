@@ -44,14 +44,15 @@ module.exports = class extends Installer {
 
     /**
      * where you put your init methods
+     * start by sorting out the name of the project
+     * and greeting of course
      * @returns {null} nothing
      */
-    initializing() {
-        this.argument('name', {
-            type: String,
-            required: true,
-            description: 'Generator name'
-        });
+    initializing()
+    {
+        
+
+
     }
 
     /**
