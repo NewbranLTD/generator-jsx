@@ -11,43 +11,58 @@
             "name": "Not using any css framework",
             "value": "none",
             "npm": null,
-            "bower": null
+            "bower": null,
+            "css": null,
+            "scss": null
         },
         {
             "name": "Bootstrap V.4 (alpha.$version)",
             "value": "bootstrap4",
             "bower": "bootstrap@4.0.0-alpha.$version",
-            "npm": ""
+            "npm": "",
+            "css": ["bootstrap","dist","css","bootstrap.css"],
+            "scss": ["bootstrap","scss","bootstrap.scss"]
         },
         {
             "name": "Daemonite's Material UI (alpha.$version)",
             "value": "materialui",
             "bower": "daemonite-material@4.0.0-alpha.$version",
-            "npm": ""
+            "npm": "",
+            "css": ["daemonite-material","css","material.css"],
+            "scss": ["daemonite-material","assets","sass","material.scss"]
         },
         {
             "name": "Fezvrasta Bootstrap Material Design 4",
             "value": "bmd4",
             "bower": "bootstrap-material-design#v4.0.0-beta.3",
-            "npm": ""
+            "npm": "",
+            "css": [],
+            "scss": ["bootstrap-material-design","scss","_core.scss"]
         },
         {
             "name": "Foundation 6",
             "value": "foundation6",
             "bower": "foundation-sites",
-            "npm": ""
+            "npm": "",
+            "css": ["foundation-sites","dist","css","foundation.css"],
+            "scss": ["foundation-sites","assets","foundation.scss"]
         },
         {
             "name": "Semantic UI" ,
             "value": "SemanticUI" ,
             "npm": "",
-            "bower": ""
+            "bower": "",
+            "css": [],
+            "scss": [],
+            "disable": true
         },
         {
             "name": "Tachyons",
             "value": "tachyons",
             "npm": "tachyons",
-            "bower": "tachyons"
+            "bower": "tachyons",
+            "css": ["tachyons-css","css","tachyons.css"],
+            "scss": null
         }
     ],
     "cssDevStyles": [
