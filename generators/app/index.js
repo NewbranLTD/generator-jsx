@@ -22,13 +22,11 @@ module.exports = class extends Installer {
         const baseIndex = 0;
         // init parent
         super(args , opts);
+        // need to figure out the app name here
         this.suggestAppName = args.length ? args[baseIndex] : path.basename(this.contextRoot);
          // Skip installation
         this.skipInstallation = opts['skip-installation-for-test-purpose-only'];
-        this.config.set({
-            appName: this.appName,
-            lang: this.lang
-        });
+
         // @TODO this will change to npm instead
         this.optionals = this.npmList.bower.map(optional => {
             optional.checked = true;
@@ -69,55 +67,43 @@ module.exports = class extends Installer {
      */
     configuring()
     {
-        const cn = this.lang === 'cn',
-        installChoices = [
-            {
-                name: 'npm',
-                value: 'npmInstall'
-            },
-            {
-                name: 'yarn',
-                value: 'yarnInstall'
-            }
-        ];
-        if (cn) {
-            installChoices.push({
-                name: 'cnpm',
-                value: 'cnpm'
-            });
-        }
-        // need to figure out the app name here
+        const installers = this._getInstallerChoices();
+        // do the first prompt here to ask for the name
+        // then we could do a config?
+        
     }
 
     /**
      * the default task - but not recommend to use this see next
      * @return {null} nothing
      */
+    /*
     default()
     {
         // I don't find this default any useful and rather confusing
     }
-
+    */
     /**
      * where you ask questions and collect answers in the this.props
      * @return {null} nothing
      */
     prompting()
     {
-        // Have Yeoman greet the user.
-        this.log(yosay(
-            'Welcome to the luminous ' + chalk.red('generator-preact') + ' generator!'
-        ));
-
         const prompts = [{
-            type: 'confirm',
-            name: 'someAnswer',
+            type: 'input',
+            name: 'appName',
             message: 'Would you like to enable this option?',
-            default: true
+            default: this.suggestAppName
         }];
+
         return this.prompt(prompts).then(props => {
             // To access props later use this.props.someAnswer;
             this.props = props;
+            // need to move this further down
+            this.config.set({
+                appName: this.props.appName,
+                lang: this.lang
+            });
         });
     }
     /**
