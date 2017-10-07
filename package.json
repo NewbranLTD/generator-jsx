@@ -1,6 +1,6 @@
 {
   "name": "generator-preact",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yeoman generator for preact.js (not react!!!) with gulp , rollup and other goodies",
   "homepage": "https://github.com/joelchu/generator-preact",
   "author": {
@@ -9,7 +9,8 @@
     "url": "joelchu.com"
   },
   "files": [
-    "generators"
+    "generators",
+    "lib"
   ],
   "main": "generators/index.js",
   "keywords": [
