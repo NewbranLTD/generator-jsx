@@ -52,7 +52,7 @@ module.exports = class extends Installer {
             yosay(
                 this.langObj.greeting.replace(
                     '{{generatorName}}',
-                    chalk.red('generator-rtjs')
+                    chalk.red('generator-jsx')
                 ).replace(
                     '{{version}}',
                     version
@@ -70,7 +70,7 @@ module.exports = class extends Installer {
         const installers = this._getInstallerChoices();
         // do the first prompt here to ask for the name
         // then we could do a config?
-        
+
     }
 
     /**

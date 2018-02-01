@@ -1,18 +1,16 @@
 # generator-preact [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Yeoman generator for preact.js (not react!!!) with gulp , rollup and other goodies
+> Yeoman generator for preact.js (not react!!!) / mithril.js using mainly JSX with gulp , rollup and other goodies
 
 ## Installation
 
 ```sh
-$ npm install --save generator-preact
+$ npm install --save generator-jsx
 ```
 
 ## Usage
 
-```js
-const generatorPreact = require('generator-preact');
-
-generatorPreact('Rainbow');
+```sh
+$ yo jsx
 ```
 ## License
 
