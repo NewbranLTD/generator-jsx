@@ -1,5 +1,5 @@
 {
-  "name": "generator-preact",
+  "name": "generator-jsx",
   "version": "0.1.0",
   "description": "Yeoman generator for preact.js (not react!!!) with gulp , rollup and other goodies",
   "homepage": "https://github.com/joelchu/generator-preact",
