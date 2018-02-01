@@ -1,0 +1,17 @@
+{
+  "greeting":
+    "欢迎来到猫的 <%= generatorName %> (<%= version %>) 前端开发神器,喵.",
+  "moduleName": "如何命名你的应用程序？",
+  "cssFramework": "你想要使用哪个CSS框架?",
+  "cssDevStyle": "你想如何开发你的外观?",
+  "installer": "使用 `npm` , `yarn` 或者 `cnpm`?",
+  "bye": "全做完了!",
+  "optionals": "安装这些可选包?",
+  "ERR_MISSING_TAG_NAME": "您需要提供一个 tag 名称!",
+  "ERR_COMPONENT_NOT_FOUND": "未找到 Component: <%= component %>!",
+  "ERR_MISSING_TAG_NAME": "您需要提供一个 mixin 名称!",
+  "IMPORT_EXTRA_LIB": "您要将此软件依赖项导入到您的服务 (service)?",
+  "runningGulpForYou": "现在运行`gulp <%= cmd %>`，请稍候...",
+  "useGit": "你要用git吗?（选择此选项，您将获得额外的 gulp 任务)",
+  "Ooops 404 NOT FOUND": "哎呀404没有找到"
+}
