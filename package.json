@@ -1,18 +1,16 @@
 {
   "name": "generator-jsx",
-  "version": "0.1.1",
-  "description": "Yeoman generator for preact.js (not react!!!) / mithril.js using mainly JSX with gulp , rollup and other goodies",
+  "version": "0.1.2",
+  "description":
+    "Yeoman generator for preact.js (not react!!!) / mithril.js using mainly JSX with gulp , rollup and other goodies",
   "homepage": "https://github.com/NewbranLTD/generator-jsx",
   "author": {
     "name": "Joel Chu",
     "email": "joelckchu@gmail.com",
-    "url": "joelchu.com"
+    "url": "newbran.ch"
   },
-  "files": [
-    "generators",
-    "lib"
-  ],
-  "main": "generators/index.js",
+  "files": ["generators", "lib"],
+  "main": "generators/app/index.js",
   "keywords": [
     "yeoman",
     "generator",
@@ -20,38 +18,65 @@
     "yeoman-generator",
     "node",
     "preact",
-    "redux"
+    "preact.js",
+    "mithril",
+    "mithril.js",
+    "redux",
+    "reactive"
   ],
   "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
-    "coveralls": "^3.0.0",
-    "nsp": "^3.1.0",
     "eslint": "^4.16.0",
-    "eslint-config-xo-space": "^0.17.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-xo": "^0.19.0",
+    "eslint-plugin-prettier": "^2.5.0",
+    "husky": "^0.14.3",
     "jest": "^22.1.4",
-    "jest-cli": "^22.1.4"
+    "jest-cli": "^22.1.4",
+    "lint-staged": "^6.1.0",
+    "nsp": "^3.1.0",
+    "prettier": "^1.10.2",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
   },
   "dependencies": {
-    "yeoman-generator": "^2.0.2",
-    "chalk": "^2.3.0",
-    "yosay": "^2.0.1"
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "generator-nodex": "^3.1.15",
+    "git-user-name": "^2.0.0"
   },
   "scripts": {
     "prepublishOnly": "nsp check",
     "pretest": "eslint . --fix",
-    "test": "jest"
+    "precommit": "lint-staged",
+    "test": "jest --runInBand --forceExit",
+    "update": "ncu -a"
   },
   "eslintConfig": {
-    "extends": "xo-space",
+    "extends": ["xo", "prettier"],
     "env": {
       "jest": true,
       "node": true
-    }
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "printWidth": 90
+        }
+      ]
+    },
+    "plugins": ["prettier"]
   },
-  "repository": "git@github.com:joelchu/generator-preact.git",
-  "license": "MIT"
+  "lint-staged": {
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
+  },
+  "repository": "git@github.com:NewbranLTD/generator-jsx.git",
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": []
+  },
+  "engines": {
+    "node": ">=7.00"
+  }
 }
