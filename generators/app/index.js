@@ -1,145 +1,243 @@
-
-const chalk = require('chalk'),
-    yosay = require('yosay'),
-    path = require('path'),
-
 /**
- * this is the top level app/index.js
- */
-// include our BaseClass extends from Generator
-version = require('../../package.json').version,
-Installer = require('../../lib/installer.js');
+ * Rtjs:app
+ * Riot.js 3 generator
+          \
+         /  `.-~~--..--~~~-.
+        <__                 `.
+     ~~~~~~~~~~~~~~~~.~~~~,','
+        TOMATO        .~~_,'
+*/
+const path = require('path');
+const {chalk, lodash, fsExtra} = require('generator-nodex');
+const Generator = require('../../lib');
+// properties
+const _ = lodash;
+const extend = _.merge;
+const join = path.join;
+const dirname = join(__dirname, '..', '..');
+const {version, name} = require(join(dirname, 'package.json'));
+const privateProps = new WeakMap();
+let __propsPkg__;
+let __basePkg__;
+// Class
+module.exports = class extends Generator {
+  /**
+   * class constructor
+   * @param {array} args
+   * @param {object} opts
+   */
+  constructor(args, opts) {
+    super(args, opts);
+    // Skip installation
+    //this.skipInstallation = opts['skip-installation-for-test-purpose-only']; // Should never use this!
+    this.option('skip-installation-for-test-purpose-only',{
+      type: Boolean,
+      default: false,
+      required: false,
+      desc: 'This should only use in development'
+    });
+    this.option('debug', {
+      type: Boolean,
+      default: false,
+      required: false
+    });
+  }
 
-module.exports = class extends Installer {
+  /**
+   * it was a `get` before but keep throwing this.fs is undefined
+   * return the json with our dependencies configuration
+   */
+  propsPkg() {
+    // caching with private
+    if (!__propsPkg__) {
+      __propsPkg__ = this.fs.readJSON(this._templatePath('package.json'), {});
+    }
+    return __propsPkg__;
+  }
 
-    /**
-     * class constructor
-     * @param {object} args arguments
-     * @param {array} opts options
-     */
-    constructor(args , opts)
-    {
-        const baseIndex = 0;
-        // init parent
-        super(args , opts);
-        // need to figure out the app name here
-        this.suggestAppName = args.length ? args[baseIndex] : path.basename(this.contextRoot);
-         // Skip installation
-        this.skipInstallation = opts['skip-installation-for-test-purpose-only'];
+  /**
+   * it was a `get` before but keep throwing this.fs is undefined
+   * return the package.json generate on the app root
+   */
+  basePkg() {
+    if (!__basePkg__) {
+      __basePkg__ = this.fs.readJSON(this._destinationPath('package.json'), {});
+    }
+    return __basePkg__;
+  }
 
-        // @TODO this will change to npm instead
-        this.optionals = this.npmList.bower.map(optional => {
-            optional.checked = true;
-            return optional;
+  /**
+   * init
+   */
+  initializing() {
+    this.optionalPackages = this.propsPkg().optionals;
+    // say hi
+    this.yosay(
+      'greeting', {
+        generatorName: name,
+        version: version
+      }
+    );
+  }
+
+  /**
+   * the actual q & a
+   */
+  prompting() {
+    // then we do our prompts ... backward
+    return this.installerAskForAppType().
+      then(this.installerAskForModuleName.bind(this)).
+      then(this.installerAskForCssFrameworks.bind(this)).
+      then(this.installerAskForCssDevStyle.bind(this)).
+      then(this.installerAskForOptionalPkg.bind(this)).
+      then(this.installerAskIfTheyWantPage.bind(this)).
+      then(this.installerAskForInstaller.bind(this)). // move the ask for installer back here
+      then(answers => this.composeWith(require.resolve('generator-nodex/generators/app'), {
+          debug: this.options.debug,
+          name: this.props.name,
+          lang: this.lang,
+          langpath: this.baseConfig.langPath,
+          skipInstall: true,
+          testEnvironment: 'jsdom',
+          poweredBy: 'generator-rtjs',
+          'skip-nodex-install': true,
+          'skip-package-name-message': true
+        }));
+  }
+
+  /**
+   * Creating files
+   */
+  writing() {
+    // prepare properties to merge into package.json
+    const propsPkg = this.propsPkg();
+    const pkg = this.basePkg();
+    const modulePkg = {};
+    // fixing some issue within the package.json during setup
+    // pkg.repository = ['git@github.com:', pkg.repository, '.git'].join('');
+    if (this.props.appType === 'module') {
+      pkg.module = "modules/index.js";
+      pkg.main = pkg.module;
+      pkg.files = ['modules'];
+    }
+    const cssFrameworkDeps = this._getCssFrameworkDeps(propsPkg.frameworks);
+    const dependencies = extend(
+      {},
+      propsPkg.dependencies,
+      this.props.optionalPackages,
+      cssFrameworkDeps,
+      this._getOptionalPackagesDeps(propsPkg.frameworks)
+    );
+    const temp = extend({}, dependencies, cssFrameworkDeps);
+    // @20171125 when they are developing module we should move dependencies to devDependencies
+    // this is due to the fact npm is NOT FOR BROWER dependencies management!
+    let pkgToWrite = {jest: {testEnvironment: 'jsdom'}};
+    const devDependencies = this._getCssDevDeps(propsPkg.devDependencies);
+    if (this.props.appType === 'module') {
+      pkgToWrite = extend(pkgToWrite, {devDependencies: extend({}, dependencies, devDependencies)});
+    }
+    else {
+      pkgToWrite = extend(pkgToWrite, {
+        dependencies,
+        devDependencies: devDependencies
+      });
+    }
+    this.fs.writeJSON(
+      this._destinationPath('package.json'),
+      extend(pkg, pkgToWrite)
+    );
+    // need to generete a config.json file into the /lib folder
+    this._generateConfigFileForProject(propsPkg);
+    // for some reason the variable pass to the default() are all undefined
+    // so we have to do this one here
+    this._copyTpl(['app','scripts','vendor.js'], {optionals: this._getDepsForVendor(temp, propsPkg.globals)}
+    );
+  }
+
+  default() {
+    this.composeWith(require.resolve('../gulp') , {
+      cssDevStyle: this.props.cssDevStyle,
+      name: this.props.name
+    });
+    const params = {lang: this.lang};
+    // setup the minimum app folder
+    this._copyTpl(
+      ['app','index.html'],
+      _.extend(params, {title: [this.props.name, this.props.appType].join(' ')})
+    );
+    this._copyTpl(
+      ['app', '404.html'],
+      _.extend(params, {title: this.t('Ooops 404 NOT FOUND')})
+    );
+    this._copyDir(['app', 'assets']);
+    // next generate the vendor.js file
+
+    // create the docs folder
+    if (this.props.githubPage) {
+      this._copyTpl(
+        ['docs','index.html'],
+        _.extend(params, {title: this.props.name + ' github page'})
+      );
+    }
+    const base = {appName: this.props.name};
+    // next copy over the style file
+    switch (this.props.cssDevStyle) {
+      case 'sass':
+        this._copyTpl(
+          ['app', 'styles', 'main.scss'],
+          extend(base, {cssFrameworkFilePath: this.props.cssFrameworkProps.files.sass})
+        );
+      break;
+      case 'less':
+        this._copyTpl(
+          ['app', 'styles', 'main.less'],
+          extend(base, {cssFrameworkFilePath: this.props.cssFrameworkProps.files.less})
+        );
+      break;
+      default:
+        this._copyTpl(['app', 'styles', 'main.css'], base);
+    }
+  }
+
+  /**
+   * Running the dependencies installation
+   */
+  install() {
+    if (!this.options['skip-installation-for-test-purpose-only']) {
+      // run installer
+      this.installerInstallDependencies();
+    }
+    // and move the /lib/index.js to the different location
+    const target = this._destinationPath(join('lib','index.js'));
+    // remove the lib/js file
+    if (this.props.appType === 'webapp') {
+      fsExtra.remove(target).
+        catch( err => {
+          this.log(chalk.red('fail to remove lib/index.js'));
         });
     }
-
-    ///////////////////////////////////////
-    //     INTERNAL YEOMAN HOOKS         //
-    //  They will run one after another  //
-    //  In a sync manner                 //
-    ///////////////////////////////////////
-
-    /**
-     * where you put your init methods
-     * start by sorting out the name of the project
-     * and greeting of course
-     * @returns {null} nothing
-     */
-    initializing()
-    {
-        this.log(
-            yosay(
-                this.langObj.greeting.replace(
-                    '{{generatorName}}',
-                    chalk.red('generator-jsx')
-                ).replace(
-                    '{{version}}',
-                    version
-                )
-            )
-        );
-    }
-
-    /**
-     * configuration task if any
-     * @return {null} nothing
-     */
-    configuring()
-    {
-        const installers = this._getInstallerChoices();
-        // do the first prompt here to ask for the name
-        // then we could do a config?
-
-    }
-
-    /**
-     * the default task - but not recommend to use this see next
-     * @return {null} nothing
-     */
-    /*
-    default()
-    {
-        // I don't find this default any useful and rather confusing
-    }
-    */
-    /**
-     * where you ask questions and collect answers in the this.props
-     * @return {null} nothing
-     */
-    prompting()
-    {
-        const prompts = [{
-            type: 'input',
-            name: 'appName',
-            message: 'Would you like to enable this option?',
-            default: this.suggestAppName
-        }];
-
-        return this.prompt(prompts).then(props => {
-            // To access props later use this.props.someAnswer;
-            this.props = props;
-            // need to move this further down
-            this.config.set({
-                appName: this.props.appName,
-                lang: this.lang
-            });
+    else if (this.props.appType === 'module') {
+      fsExtra.move(target, this._destinationPath(join('modules', 'index.js'))).
+        catch( err => {
+          this.log(chalk.red('fail to move to modules'));
         });
     }
-    /**
-     *
-     * @return {null} nothing
-     */
-    writing()
-    {
-        this.fs.copy(
-            this.templatePath('dummyfile.txt'),
-            this.destinationPath('dummyfile.txt')
-        );
-    }
-    /**
-     * conflicts handler during the write
-     * @return {null} nothing
-     */
-    conflicts()
-    {
-        // resolve any conflicts you may have during installation
-    }
-    /**
-     * run the installer
-     * @return {null} nothing
-     */
-    install()
-    {
-        this.installDependencies();
-    }
-    /**
-     * end and run the clean up etc
-     * @return {null} nothing
-     */
-    end()
-    {
-        // any clean up or say goodbye etc here
-    }
+  }
 
+  /**
+   * end message
+   */
+  end() {
+    this.log(
+      chalk.yellow('BYE!')
+    );
+    // @TODO ask them if they want to perform a update on their packages
+
+    // if they have select githubPage then remind them to setup their page on github as well
+
+    // now run the gulp:init
+    if (!this.options['skip-installation-for-test-purpose-only'] && process.env.NODE_ENV !== 'test') {
+
+    }
+  }
 };

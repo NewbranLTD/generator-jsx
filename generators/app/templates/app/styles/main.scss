@@ -1,5 +1,5 @@
 /* <%= appName %> main sass file */
 
-@import "../../bower_components/<%= cssFrameworkFilePath %>";
+@import "../../node_modules/<%= cssFrameworkFilePath %>";
 
 /* do you thing here */

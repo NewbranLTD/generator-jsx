@@ -1,0 +1,29 @@
+/**
+ * <%= serviceName %> service
+ * <%= serviceFileName %>
+ */
+<% if (extraImports.length) {
+    extraImports.forEach( function(pack)
+    {
+%>import <%= pack.name %> from '<%= pack.id %>';
+<%
+    });
+} %>
+<% if (parentName) { %>import <%= parentName %> from 'services/<%= parentFileName %>';<% } %>
+export default class <%= serviceName %><% if (parentName) { %> extends <%= parentName %><% } %> {
+
+	/**
+	 * class <%= serviceName %> constructor
+	 */
+	constructor()
+	{
+		<% if (parentName) { %>super();<% } %>
+	}
+    /**
+     * for test purpose
+     */
+    get name()
+    {
+        return '<%= serviceName %>';
+    }
+}

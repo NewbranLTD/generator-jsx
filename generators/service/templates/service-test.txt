@@ -1,0 +1,22 @@
+'use strict';
+/**
+ * <%= serviceName %> service test file
+ */
+
+const <%= serviceName %> = require('<%= serviceFileName %>');
+
+let classObject;
+
+describe('Service <%= serviceName %>' , () =>
+{
+    beforeAll( () => {
+        classObject = new <%= serviceName %>();
+    });
+
+    test('creates <%= serviceName %> service file' , () =>
+    {
+        expect(classObject.name).toEqual(
+            '<%= serviceName %>'
+        );
+    });
+});
