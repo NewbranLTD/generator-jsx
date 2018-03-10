@@ -62,8 +62,6 @@ async function rollupApp() {
         ],
         plugins: [
           'external-helpers'
-          // 'transform-class-properties',
-          // ['transform-react-jsx', { pragma: 'h' }]
         ]
       }),
       nodeResolve({
@@ -181,8 +179,7 @@ More coming soon ...
 
 ## License
 
-MIT © [Joel Chu](NewbranLTD.com)
-
+MIT © [Joel Chu](https://newbran.ch)
 
 [npm-image]: https://badge.fury.io/js/generator-jsx.svg
 [npm-url]: https://npmjs.org/package/generator-jsx
