@@ -74,9 +74,9 @@ module.exports = class extends Generator {
     // say hi
     this.yosay(
       'greeting', {
-generatorName: name,
-version: version
-}
+        generatorName: name,
+        version: version
+      }
     );
   }
 
