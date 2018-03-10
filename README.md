@@ -62,8 +62,6 @@ async function rollupApp() {
         ],
         plugins: [
           'external-helpers'
-          // 'transform-class-properties',
-          // ['transform-react-jsx', { pragma: 'h' }]
         ]
       }),
       nodeResolve({
@@ -90,6 +88,22 @@ async function rollupApp() {
 }
 ```
 
+The `postcss` plugin will grab all your css files. In my case, I only keep one top level `./styles/index.css` (many `@import` inside).
+**A discovery was made during setting this up**, according to the [postcss-import](https://github.com/postcss/postcss-import) documentation.
+You should able to import a npm module by it's name. But it didn't work. I was using [bulma](https://bulma.io/).
+
+```css  
+  /* this won't work */
+  @import "bulma";
+  /* instead point to the location within the node_modules directory */
+  @import "bulma/css/bulma.css";
+
+```
+
+Then it works correctly, hope this help someone else out there.
+
+### Part 2, bundle your vendor files (without babel)
+
 Next, another rollup call to bundle your vendor files. First you need to setup a separate `vendor.js` to import modules:
 
 ```js
@@ -114,7 +128,7 @@ import rest from '@feathersjs/rest-client';
 ```
 
 There was one problem I couldn't fix. It was the [axios](https://www.npmjs.com/package/axios) ajax library. Rollup just keep throwing
-`Error: Unexpected token`. So I change it to (superagent)(https://www.npmjs.com/package/superagent) instead.
+`Error: Unexpected token`. So I change it to [superagent](https://www.npmjs.com/package/superagent) instead.
 
 Then your vendor rollup:
 
@@ -165,8 +179,7 @@ More coming soon ...
 
 ## License
 
-MIT © [Joel Chu](NewbranLTD.com)
-
+MIT © [Joel Chu](https://newbran.ch)
 
 [npm-image]: https://badge.fury.io/js/generator-jsx.svg
 [npm-url]: https://npmjs.org/package/generator-jsx
