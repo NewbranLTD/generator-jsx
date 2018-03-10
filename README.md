@@ -102,6 +102,36 @@ You should able to import a npm module by it's name. But it didn't work. I was u
 
 Then it works correctly, hope this help someone else out there.
 
+**UPDATE** to make the two compatible (preact-cli and rollup, because I am using both on different things). I change the file and rollup config as follow
+
+In your CSS:
+
+```css
+  @import "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css";
+```
+
+Then in your rollup config, add new [rollup-plugin-replace](https://github.com/rollup/rollup-plugin-replace) plugin. And add it before your `postcss` plugin:
+
+```js
+  plugins: [
+    replace({
+      exclude: '**/*.js', // don't want any js files
+      'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css': 'bulma/css/bulma.css'
+    }),
+    postcss({
+      extract: true,
+      sourceMap: true,
+      minimize: true,
+      plugins: [
+        atImport()
+      ]
+    }),
+    ...
+  ]
+```
+
+Now your `bulma.css` file will get bundle into your build css file.
+
 ### Part 2, bundle your vendor files (without babel)
 
 Next, another rollup call to bundle your vendor files. First you need to setup a separate `vendor.js` to import modules:
@@ -130,6 +160,13 @@ import rest from '@feathersjs/rest-client';
 There was one problem I couldn't fix. It was the [axios](https://www.npmjs.com/package/axios) ajax library. Rollup just keep throwing
 `Error: Unexpected token`. So I change it to [superagent](https://www.npmjs.com/package/superagent) instead.
 
+But even `superagent` is not straight forward, the problem is they didn't include a proper `browser` field in their package.json (seriously?!!!)
+And they ship with one version for node.js another one is for the browser.
+
+If you just use the node.js and try to bundle it. Rollup will throw a ```sh Error: Illegal reassignment to import 'commonjsHelpers' ``` error.
+
+To fix this, you need to tell `rollup-plugin-node-resolve` which file to use. See the `customResolveOptions` option.
+
 Then your vendor rollup:
 
 ```js
@@ -148,7 +185,11 @@ async function rollupVendor() {
       }),
       nodeResolve({
         jsnext: true,
-        main: false
+        main: false,
+        browser: true,
+        customResolveOptions: {
+          'node_modules/superagent/superagent.js': 'superagent'
+        }
       })
     ]
   });
