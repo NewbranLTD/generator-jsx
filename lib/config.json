@@ -1,0 +1,12 @@
+{
+  "appPath": "app",
+  "srcPath": "srv",
+  "destPath": "www",
+  "testPath": "__tests__",
+  "defaultLang": "en",
+  "scriptPathName": "scripts",
+  "mixinPathName": "mixins",
+  "componentPathName": "components",
+  "servicePathName": "services",
+  "modulePathName": "modules"
+}

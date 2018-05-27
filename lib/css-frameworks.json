@@ -1,0 +1,44 @@
+{
+  "frameworks": [
+    {
+      "name": "Not using CSS framework",
+      "value": "none",
+      "dev": "none"
+    },
+    {
+      "name": "Bootstrap 4",
+      "value": "bootstrap",
+      "dev": "sass",
+      "files": {
+        "css": ["bootstrap", "dist", "css", "bootstrap.css"],
+        "sass": ["bootstrap", "scss", "bootstrap.scss"]
+      }
+    },
+    {
+      "name": "Bootstrap Material design 4",
+      "value": "bootstrap-material-design",
+      "dev": "sass",
+      "files": {
+        "sass": ["bootstrap-material-design", "scss", "_core.scss"]
+      }
+    }
+  ],
+  "devStyle": [
+    {
+      "name": "CSS Next",
+      "value": "cssNext"
+    },
+    {
+      "name": "SASS",
+      "value": "sass"
+    },
+    {
+      "name": "CSS",
+      "value": "css"
+    },
+    {
+      "name": "None",
+      "value": "none"
+    }
+  ]
+}

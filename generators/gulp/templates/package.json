@@ -1,0 +1,31 @@
+{
+  "description": "This is partial devDependencies for gulp and build",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015-riot": "^1.1.0",
+    "del": "^3.0.0",
+    "gulp-debug": "^3.1.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-inject": "^4.3.0",
+    "gulp-server-io": "^1.0.0",
+    "gulp-string-replace": "^0.4.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-includepaths": "^0.2.2",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-riot": "^1.1.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-stream": "^1.24.1",
+    "stream-series": "^0.1.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^10.0.3",
+    "semver": "^5.4.1",
+    "gulp-bump": "^2.8.0",
+    "gulp-git": "^2.4.2"
+  }
+}

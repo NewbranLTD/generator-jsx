@@ -1,0 +1,18 @@
+{
+  "greeting":
+    "Welcome to the cat's meow <%= generatorName %> (<%= version %>) generator!",
+  "moduleName": "What's your app name?",
+  "cssFramework": "Which CSS framework would you like to use?",
+  "cssDevStyle": "How would you like to develop your styling?",
+  "installer": "Use `npm` or `yarn`?",
+  "bye": "All done! ",
+  "optionals": "Install these optional packages?",
+  "ERR_MISSING_TAG_NAME": "You need to provide a tag name!",
+  "ERR_COMPONENT_NOT_FOUND": "Component: <%= component %> not found!",
+  "ERR_MISSING_TAG_NAME": "You need to provide a mixin name!",
+  "IMPORT_EXTRA_LIB":
+    "Would you like to import this dependencies to your service?",
+  "runningGulpForYou": "Running `gulp <%= cmd %>` for you now, please wait ...",
+  "useGit":
+    "Are you going to use git? (Pick this option and you will get additonal gulp tasks)"
+}
