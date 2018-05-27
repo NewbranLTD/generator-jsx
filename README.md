@@ -1,6 +1,27 @@
 # generator-jsx [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Yeoman generator for preact.js (not react!!!) / mithril.js using mainly JSX with gulp , rollup and other goodies
 
+# FCUK GIHUB, WE HAVE MOVED TO GITLAB
+
+NEW URL [generator-jsx @ gitlab](https://gitlab.com/newbranltd/generator-jsx)
+
+Yes, fuck you github!
+
+```
+....................../´¯/)
+....................,/¯../
+.................../..../
+............./´¯/'...'/´¯¯`·¸
+........../'/.../..../......./¨¯\
+........('(...´...´.... ¯~/'...')
+.........\.................'...../
+..........''...\.......... _.·´
+............\..............(
+..............\.............\...
+
+```
+
+
 ## Installation
 
 ```sh
