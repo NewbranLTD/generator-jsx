@@ -5,7 +5,7 @@
 
 NEW URL [generator-jsx @ gitlab](https://gitlab.com/newbranltd/generator-jsx)
 
-Yes, fuck you github!
+Yes, FU github!
 
 ```
 ....................../´¯/)
